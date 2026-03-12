@@ -32,21 +32,56 @@ public class ArraysAndStreams2 {
                .filter(s -> s.compareToIgnoreCase("n") < 0)
                .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                .collect(Collectors.toList()));
+
+      /**
+       * ## 1. Filter strings that start with a vowel (case-insensitive)
+       *
+       * Uses a regular expression with `(?i)` to enable case‑insensitive matching.
+       *
+       * ### Stream Logic
+       * ```java
+       * Arrays.stream(words)
+       *       .filter(s -> s.matches("(?i)^[aeiou].*"))
+       *       .toList();
+       * This produces a list of all strings beginning with A, E, I, O, or U.
+       */
+      System.out.println("\n--- Strings Starting With a Vowel ---");
+      List<String> vowelStart = Arrays.stream(words)
+           .filter(s -> s.matches("(?i)^[aeiou].*"))
+           .toList();
+      vowelStart.forEach(System.out::println);
+
+      /**
+       * ## 2. Concatenate all strings into a comma-separated string
+       * Uses `Collectors.joining(", ")` to merge all elements into a single line.
+       * ### Stream Logic
+       * ```java
+       * Arrays.stream(words)
+       *       .collect(Collectors.joining(", "));
+       * This produces a readable, comma‑separated representation of the array.
+       */
+      System.out.println("\n--- Concatenated String (Comma-Separated) ---");
+      String concatenated = Arrays.stream(words)
+           .collect(Collectors.joining(", "));
+      System.out.println(concatenated);
+
+      /**
+       * ## 3. Count strings with more than 5 characters
+       *
+       * Counts how many strings exceed 5 characters in length.
+       * ### Stream Logic
+       * ```java
+       * Arrays.stream(words)
+       *       .filter(s -> s.length() > 5)
+       *       .count();
+       * ```
+       * This demonstrates filtering + terminal counting using streams.
+       */
+      System.out.println("\n--- Count of Strings With More Than 5 Characters ---");
+      long countLongerThan5 = Arrays.stream(words)
+           .filter(s -> s.length() > 5)
+           .count();
+      System.out.println("Count: " + countLongerThan5);
    }
 } 
 
-
-/**************************************************************************
- * (C) Copyright 1992-2018 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- *************************************************************************/
